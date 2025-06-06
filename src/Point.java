@@ -1,7 +1,7 @@
 public class Point implements Comparable<Point>{
+
     private final int x, y;
     private final String value;
-
 
     public Point(int x, int y, String value) {
         this.x = x;
@@ -17,7 +17,6 @@ public class Point implements Comparable<Point>{
 
     @Override
     public String toString() {
-        //return "{"+x+", "+y+": "+value+ "}";
         return value;
     }      
 
@@ -25,5 +24,4 @@ public class Point implements Comparable<Point>{
     public int compareTo(Point p) {
         return this.value.compareTo(p.value) ;
     }
-
 }

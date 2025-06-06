@@ -20,7 +20,7 @@
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.PriorityQueue;
+
 
 /**
  *  The {@code MinPQ} class represents a priority queue of generic keys.

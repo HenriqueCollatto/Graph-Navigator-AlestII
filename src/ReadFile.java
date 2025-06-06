@@ -18,7 +18,7 @@ public class ReadFile {
             System.out.println("\n-----------------------------------------------------------------\n");
             System.out.println("Caso: " + rows + " "+ columns);   
 
-            PointsGraph pg = new PointsGraph(rows * columns, rows, columns);
+            PointsGraph pg = new PointsGraph(rows, columns);
              
             Point[][] matriz_points = new Point[rows][columns];
 
@@ -28,7 +28,6 @@ public class ReadFile {
                 String[] line = br.readLine().split(""); 
                 
                 for (int j = 0; j < columns; j++) {
-                    
                     
                     Point p = new Point(i, j, line[j]);
                     matriz_points[i][j] = p;
@@ -52,8 +51,6 @@ public class ReadFile {
                 }
             }
 
-
-
             //imprimeMatriz(matriz_points, rows, columns);
             
             
@@ -63,9 +60,10 @@ public class ReadFile {
             Point prev = min_p1;
             int total_distance = 0;
             
-           // while (!pq.isEmpty()) {  
+           //while (!pq.isEmpty()) {  
                 while (true) { 
                     Point min_p = (!pq.isEmpty()) ?  pq.delMin() :  min_p1;
+                    //Point min_p =  pq.delMin();
 
                     bfs = (min_p1 == prev) ?  new BFS(pg, min_p1) :  new BFS(pg, prev);
                     
@@ -94,14 +92,14 @@ public class ReadFile {
                         
                         
                     }
-                    //System.out.println();
+                    
 
                     if(min_p == min_p1){
                         break;
                     }
-               // }
+                }
                     
-            }
+            //}
             
             // bfs =  new BFS(pg, prev);
             // boolean has_path = bfs.hasPath(min_p1);
@@ -133,9 +131,7 @@ public class ReadFile {
                 double seconds = (double) estimatedTime / 1000000000;
                 System.out.println("Tempo em segundos: "+ seconds);
                 
-                
-                
-                
+
                 
             } catch (IOException x) {
                 System.err.format("Erro de E/S: %s%n", x);
