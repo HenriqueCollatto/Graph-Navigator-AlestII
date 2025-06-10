@@ -5,7 +5,7 @@ public class Main {
 
         String[] arr = {"case0", "case1","case2","case3","case4","case5" };
 
-        int iterations = 1;
+        int iterations = 20;
         Double[][] time = new Double[iterations][arr.length];
 
         for (int i = 0; i < iterations; i++) {  

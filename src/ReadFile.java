@@ -18,7 +18,7 @@ public class ReadFile {
             int columns = Integer.parseInt(firstLine[1]);
             
             System.out.println("\n-----------------------------------------------------------------\n");
-            System.out.println("Caso: " + rows + " "+ columns);   
+            System.out.println("Map: " + rows + " "+ columns);   
 
             PointsGraph pg = new PointsGraph(rows, columns);
              
