@@ -103,28 +103,5 @@ public class PointsGraph {
     public int degree(Point p) {
         validateVertex(p);
         return mat_adj[p.getX()][p.getY()].size();
-    }
-
-
-    /**
-     * Returns a string representation of this graph.
-     *
-     * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
-     *         followed by the <em>V</em> adjacency lists
-     */
-    // @Override
-    // public String toString() {
-    //     StringBuilder s = new StringBuilder();
-    //     s.append(V).append(" vertices, ").append(E).append(" edges ").append(NEWLINE);
-    //     for (int v = 0; v < V; v++) {
-    //         s.append(v).append(": ");
-    //         for (Point w : mat_adj[MAX_HEIGHT][MAX_WIDTH]) {
-    //             s.append(w).append(" ");
-    //         }
-    //         s.append(NEWLINE);
-    //     }
-    //     return s.toString();
-    // }
-   
-
+    }   
 }

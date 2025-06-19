@@ -3,9 +3,16 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) {
 
-        String[] arr = {"case0", "case1","case2","case3","case4","case5" };
+        String[] arr = {"case0"
+                        , "case1"
+                        ,"case2"
+                        ,"case3"
+                        ,"case4"
+                        ,"case5" 
+                    };
+        
 
-        int iterations = 20;
+        int iterations = 1;
         Double[][] time = new Double[iterations][arr.length];
 
         for (int i = 0; i < iterations; i++) {  
@@ -17,16 +24,5 @@ public class Main {
         }
 
         ReadFile.printMatrix(time,iterations, arr.length);
-
-        // java.util.Arrays.asList(
-        //                     "case0"
-        //                          ,"case1"
-        //                          ,"case2"
-        //                          ,"case3"
-        //                          ,"case4"
-        //                          ,"case5"
-        //                         )
-        // .stream().map(text -> Paths.get("casosDeTeste", text + ".map").toString())
-        // .forEach(path -> new ReadFile(path));
     }
 }

@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 
@@ -22,9 +23,9 @@ public class ReadFile {
 
             PointsGraph pg = new PointsGraph(rows, columns);
              
-            Point[][] matriz_points = new Point[rows][columns];
+            Point[][] matrix_points = new Point[rows][columns];
 
-            MinPQ<Point> pq = new MinPQ<>();
+            PriorityQueue<Point> min_pq = new PriorityQueue<>();
 
             for (int i = 0; i < rows; i++) {
                 String[] line = br.readLine().split(""); 
@@ -32,35 +33,36 @@ public class ReadFile {
                 for (int j = 0; j < columns; j++) {
                     
                     Point p = new Point(i, j, line[j]);
-                    matriz_points[i][j] = p;     
+                    matrix_points[i][j] = p;     
                     
-                    if(!line[j].equals("*")){
-                        if(j != 0 && !matriz_points[i][j - 1].getValue().equals("*")){ // coluna da esquerda (menos quando a coluna é zero)
-                            pg.addEdge(matriz_points[i][j - 1], matriz_points[i][j]); // adiciona uma aresta entre os dois
+                    if(!line[j].equals("*")){ // verifica se é ponto ou número
+                        if(j != 0 && !matrix_points[i][j - 1].getValue().equals("*")){ // coluna da esquerda (menos quando a coluna é zero)
+                            pg.addEdge(matrix_points[i][j - 1], matrix_points[i][j]); // adiciona uma aresta entre os dois
                             
                         } 
 
-                        if(i != 0 && !matriz_points[i -1][j].getValue().equals("*")){ // linha de cima (menos quando a linha é zero)
-                            pg.addEdge(matriz_points[i - 1][j], matriz_points[i][j]); // adiciona uma aresta entre os dois
+                        if(i != 0 && !matrix_points[i -1][j].getValue().equals("*")){ // linha de cima (menos quando a linha é zero)
+                            pg.addEdge(matrix_points[i - 1][j], matrix_points[i][j]); // adiciona uma aresta entre os dois
                             
                         } 
                         
-                        if( !line[j].equals(".")){ // verifica se é um numero 
-                            pq.insert(p); // adiciona na fila de prioridade                            
+                        if(!line[j].equals(".")){ // verifica se é um numero  
+                            min_pq.add(p);    // adiciona na fila de prioridade                       
                         }
                     }   
                 }
             }
 
-            //printMatrix(matriz_points, rows, columns);
+            //printMatrix(matrix_points, rows, columns);
             
-            Point min_p1 = pq.delMin();
+
+            Point min_p1 = min_pq.poll();
             Point prev = min_p1;
             int total_distance = 0;
             
           
             while (true) { 
-                Point min_p = (!pq.isEmpty()) ?  pq.delMin() :  min_p1;
+                Point min_p = (!min_pq.isEmpty()) ?  min_pq.poll() :  min_p1;
 
                 BFS bfs = (min_p1 == prev) ?  new BFS(pg, min_p1) :  new BFS(pg, prev);
                 
@@ -69,7 +71,6 @@ public class ReadFile {
                 if (has_path) {
                     List<Point> path_to = new ArrayList<>();
                     Stack<Point> stack_points = new Stack<>();
-                    
                     
                     for (Point p : bfs.pathTo(min_p)) {
                         stack_points.push(p);
@@ -100,14 +101,13 @@ public class ReadFile {
             double seconds = (double) estimatedTime / 1000000000;
             final_time = seconds;
             System.out.println("Tempo em segundos: "+ seconds);
-                
-                
+                  
             } catch (IOException x) {
                 System.err.format("Erro de E/S: %s%n", x);
             }
         }
         
-        public static <T> void printMatrix(T[][] matriz, int rows, int columns) {
+        public static <T> void printMatrix(T[][] matrix, int rows, int columns) {
             System.out.println("\nMatriz de Pontos\n");
             
             System.out.print("  |");
@@ -121,7 +121,7 @@ public class ReadFile {
                 System.out.printf("%2d|", i);
             
                 for (int j = 0; j < columns; j++) {
-                    System.out.printf("%s |", matriz[i][j]);
+                    System.out.printf("%s |", matrix[i][j]);
                 }
             System.out.println();
             }
@@ -130,7 +130,4 @@ public class ReadFile {
         public double getTime(){
             return final_time;
         }
-
-
 }
-

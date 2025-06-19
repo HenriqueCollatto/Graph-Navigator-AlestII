@@ -28,20 +28,18 @@ public class BFS{
             Point aux = q.remove();            
             
             Point point_edge = edgeTo[aux.getX()][aux.getY()];
-            if(point_edge != null && aux!=point_edge){
-                
+            if(point_edge != null && aux!=point_edge){ 
                 distTo[aux.getX()][aux.getY()] = distTo[point_edge.getX()][point_edge.getY()]+1;
             }
                 
             for(Point adj: pg.adj(aux)){
                 if(!marked[adj.getX()][adj.getY()]){
-                    marked[adj.getX()][adj.getY()]=true;
-                    edgeTo[adj.getX()][adj.getY()]=aux;
+                    marked[adj.getX()][adj.getY()] = true;
+                    edgeTo[adj.getX()][adj.getY()] = aux;
                     q.add(adj);
                 }
             }
         }
-
     }
 
     public boolean hasPath(Point p){
@@ -62,5 +60,4 @@ public class BFS{
         }
         return linklist;
     }
-
 }
